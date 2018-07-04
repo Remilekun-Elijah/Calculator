@@ -1,17 +1,18 @@
-body{
+body {
 	/*display: -webkit-box;
 	-webkit-box-pack: center;*/
 	display: flex;
 	justify-content: center;
 }
+
 #frame {
-	background-image: url("C:/Users/user/Documents/IMG_20180413_145922_969.JPG");
+	background-image: url("C:/Users/user/Documents/IMG_20180413_145922_969.JPG") !important;
 	width: 459px;
 	height: 533px;
 	color: dimgray;
 }
 
-h2{
+h2 {
 	position: relative;
 	top: 25px;
 	text-align: center;
@@ -24,10 +25,10 @@ h2{
 	color: darkmagenta;
 
 
-	
+
 }
 
-h3{
+h3 {
 	position: relative;
 	top: 35px;
 	text-align: center;
@@ -37,16 +38,41 @@ h3{
 	padding: 8px;
 	background-color: black;
 	color: darkgreen;
-	
+
 }
 
 .clock {
-	
+
+	transition: 1s linear;
 	position: relative;
 	top: 150px;
 	text-align: center;
-	font-size: 35px;
+	font-size: 30px;
 	letter-spacing: 4px;
 	color: aquamarine;
-	
+
+}
+
+.clock:hover {
+
+	animation-name: transit;
+	animation-duration: 1s;
+		animation-fill-mode: forwards;
+	position: relative;
+	top: 150px;
+	text-align: center;
+	/*
+	font-size: 35px;
+	letter-spacing: 4px;
+*/
+	color: purple;
+}
+
+@keyframes transit {
+	100% {
+		transform: scale(1.1);
+
+		transition: 1s;
+	}
+	0% {}
 }

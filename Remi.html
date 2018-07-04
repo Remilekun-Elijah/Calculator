@@ -1,29 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <title> Hello World </title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-	
-    </head>
-  <body>
-  	
+  <meta charset="utf-8">
+  <title> Hello World </title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="../projects/Libraries/new-libraries/bootstrap.min-3.3.7.css">
+  <script src="../projects/Libraries/new-libraries/bootstrap.min-3.3.7.js"></script>
+  <script src="../projects/Libraries/new-libraries/jQuery.min-3.3.1.js"></script>
+</head>
 
+<body>
 
-    <div id="frame">
-         
-		<h2> Hello World!</h2>
-		<h3> HNG 4.0 INTERNSHIP</h3>
-	
-		<div class="clock">
-    <?php date_default_timezone_set('africa/lagos');?>
-		<?php  echo . date('h:i:sa');?>
-		</div>
-   </div>
+  <div id="frame">
+    <div class="container">
+      <h2> Hello World!</h2>
+      <h3> HNG 4.0 INTERNSHIP</h3>
 
+      <div class="clock ">
+        <script type="text/javascript ">
+          function clock(time, hours, minutes, seconds, lunch, ampm) {
+            time = new Date();
+            hours = time.getHours();
+            hours = hours % 12;
+            minutes = time.getMinutes();
+            seconds = time.getSeconds();
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            ampm = hours < 12 ? '<small>PM</small>' : '<small>AM</small>';
+            lunch = hours + ':' + minutes + ' ' + ampm;
+            //            if (seconds === 60) {
+            //
+            //              document.location.reload();
+            //            }
+            return lunch;
+          }
+          document.write(clock());
 
-  </body>
+        </script>
+      </div>
+    </div>
+
+  </div>
+</body>
+
 </html>
-
-
-
