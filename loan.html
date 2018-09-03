@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Testing</title>
+<style type="text/css">
+#div{
+text-align: center;
+padding: 10px;
+background: #f7f7f7;
+}
+.err{
+background: maroon;
+color: red;
+}
+span, #result{
+display: none;
+}
+input {
+ width: 150px;
+}
+</style>
+</head>
+<body>
+<div id='div'>
+<h1 class='h1'> Loan calculator </h1>
+<form id='form'>
+<label for='amount' style='margin-right: 15px;'> $</label>
+<input style=" padding: 3px; border: 1px solid #aaa;" type='number' id='amount' placeholder='Loan amount'>
+<br>
+<label for='interest' style="margin-right: 13px; padding-right: 0px;">%</label>
+<input style='margin-left:0px; margin-top: 10px; padding: 3px; border: 1px solid #aaa'  min="1" max="100"  type='number' id='interest' placeholder='Interest'>
+<br>
+<label for='year' style='margin-right: 2px;'> Yrs</label>
+<input style="border: 1px solid #aaa; padding: 3px; margin-top: 10px;" type='number' id='year' placeholder='Years'> 
+<br><br>
+<input type='submit' value='Calculate' id='btn'>
+</form>
+<br>
+<span >Calculating.</span>
+
+<div id='result'>
+<h2> Result</h2>
+<label for='total-amount' style="margin-right: 15px;">Monthly Pay</label>
+<input style="padding: 3px;" type='text' id='total-amount'>
+<br>
+<label for='total-interest' style="margin-right: 34px;">Total Pay</label>
+<input style="padding: 3px; margin-top: 10px" type='text' id='total-interest'>
+<br>
+<label for='total-gain' style="margin-right: 2px;">Total Interest </label>
+<input style="padding: 3px; margin-top: 10px" type='text' id='total-gain'>
+</div>
+</div>
+
+<script type="text/javascript" >
+
+let amount = document.querySelector("#amount"),
+     interest = document.querySelector("#interest"),
+    year = document.querySelector("#year"),
+      monthlyPay = document.querySelector("#total-amount"),
+      totalPay = document.querySelector("#total-interest"),
+      totalProfit = document.querySelector("#total-gain"),
+       form = document.querySelector("form"),
+     btn = document.querySelector('#btn');
+     
+     
+      span = document.querySelector('span');
+      res = document.querySelector("#result");
+      
+      
+      monthlyPay.disabled = true;
+      totalProfit.disabled = true;
+      totalPay.disabled = true;
+      
+     btn.style.background = '#aaa';
+      btn.style.border = 'none';
+      btn.style.padding = '10px';
+   
+   
+   
+ let calculate = (e) => {
+ //e.preventDefault();
+ 
+ var yr = parseFloat(year.value)*12,
+      intr = parseFloat(interest.value)  / 100 / 12,
+      amt = parseFloat(amount.value);
+ 
+ var x = Math.pow(1 + intr , yr);
+ // monthly pay
+var monthly = (amt * x * intr) / (x-1);
+
+if(isFinite(monthly)){
+monthlyPay.value = "$    "+monthly.toFixed(2);
+totalPay.value = "$   ".concat((monthly * yr).toFixed(2));
+totalProfit.value = "$    ". concat(((monthly * yr ) - amt).toFixed(2));
+/* amount.value = "";
+interest.value = "";
+year.value = ""; */
+res.style.display = 'block'; 
+form.reset();
+} else{
+var error = function(msg){
+var el = document.createElement('p');
+el.className = "err";
+el.appendChild(document.createTextNode(msg));
+document.querySelector("#div").insertBefore(el, document.querySelector(".h1"));
+}
+
+error("Please Check your Numbers");
+
+var clearError  = function (){
+document.querySelector('.err').remove();
+}
+setTimeout(clearError, 3000);
+}
+
+}
+var clearLoader = function (){
+ span.style.display = 'none';
+ 
+}
+var loading = function (){
+span.innerText += '.';
+
+if(span.innerText >= "Calculating....") {
+span.innerText = "Calculating."
+}
+
+}
+
+form.addEventListener("submit",  (e) => {
+e.preventDefault();
+res.style.display = 'none';
+span.style.display = 'block';
+ setInterval(loading, 1000);
+
+setTimeout(clearLoader, 3000);
+setTimeout(calculate, 3000);
+});
+</script>
+</body>
+</html>

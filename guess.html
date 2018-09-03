@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Guesser Game</title>
+
+<style type="text/css">
+h1{
+color: teal;
+margin-top: -0.1em;
+border-color: teal;
+border-style: double double solid double ;
+border-radius: 2% 2% 0% 0%;
+box-shadow: 1px 5px 3px #555;
+}
+#input{
+margin-top: 20px;
+padding: 5px;
+border: 1px solid #ccc;
+border: 1px solid #333;
+box-shadow: 0px 5px 2px #aaa;
+}
+#guess-btn{
+padding: 6px;
+border: none;
+background: teal;
+color: whitesmoke;
+box-shadow: 0px 5px 2px #aaa;
+}
+p{
+color: #555;
+}
+p b{
+color: teal;
+}
+strong{
+color: teal;
+}
+strong b{
+color: #777;
+}
+.container{
+padding: 1em;
+margin: 0px 0px;
+border-top: 1px solid #aaa;
+border-top-right-radius: 10px;
+border-top-left-radius: 10px;
+box-shadow: 0px 5px 3px #333;
+}
+#form{
+margin-top: -1em;
+}
+</style>
+</head>
+<body style='text-align: center'>
+
+<div class="container">
+  <h1> Guesser Game </h1>
+
+  <strong class='lead'> Cash: $ <b style="margin-right:1em" id="money">10</b> <span>Trials: <span id="minus" style='font-size: 25px; position: relative; top: 3px; color: #777;'>-</span> <b id="trial">3</b><span id="plus" style='font-size: 18px;'> +</span> </span> </strong>
+
+  <p> Guess a number between <b id='min'>1</b> and <b id='max'>3</b> </p>
+  <form id='form'>
+    <input type='number' id='input' placeholder='Enter A Number'>
+    <input type='submit' value='Guess' id='guess-btn'>
+  </form>
+  <br>
+  <span id='span'> </span>
+
+</div>
+
+<script src="guess.js"></script>
+</body>
+</html>
