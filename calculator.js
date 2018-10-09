@@ -77,7 +77,7 @@ Calculator.prototype.power = function (pow,light){
        
     }else{
       screen.value = "Turning Off Calculator...";
-      
+      msg.textContent = '';
       if(light.innerText.includes("On")){
        setTimeout(calc.off, 2000);
        }else{ console.error(404)
