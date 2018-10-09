@@ -29,6 +29,7 @@ Calculator.prototype.on = function(){
 Calculator.prototype.off = function (){
   userBtn.innerHTML = "Off <span class='Off' id='On'></span>";
   screen.value = "";
+  msg.textContent = '';
   document.location.reload();
 }
 
