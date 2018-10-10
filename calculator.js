@@ -9,12 +9,36 @@ let powerBtn = document.querySelector(".power"),
 const Calculator = function(){
 
 
-// turning On/Off
+// main power supply
 this.power(powerBtn, userBtn);
-//On 
-//this.on();
+
 }
 
+// power prototype
+Calculator.prototype.power = function (pow,light){
+  pow.addEventListener("click", () => {
+  
+  if(light.innerText.includes("Off")){
+    screen.value = "Turning On Calculator....";
+    screen.style.fontFamily = "san-serif";
+    
+      if(light.innerText.includes("Off")){
+        setTimeout(calc.on, 1000)
+       };
+       
+    }else{
+      screen.value = "Turning Off Calculator...";
+      msg.textContent = '';
+      screen.style.fontFamily = "san-serif";
+      
+      if(light.innerText.includes("On")){
+       setTimeout(calc.off, 2000);
+       }else{ console.error(404)
+         }
+     
+     }
+  });
+}
 
 // Turn on calculator
 Calculator.prototype.on = function(){
@@ -33,60 +57,55 @@ Calculator.prototype.off = function (){
   document.location.reload();
 }
 
-// getting button text
-
+//showing clicked numbers on the screen
 Calculator.prototype.appendToScreen = function(){
   
-  num.forEach( function(numb){
-     function showInScreen(e){
+  num.forEach( numb => {
+     let showInScreen = e => {
           output.value += e.target.textContent;
     }  
    numb.addEventListener("click", showInScreen);
+   numb.addEventListener("click", ()=>{
+       let screenVal = screen.value;
+      if(screenVal.includes("+")||screenVal.includes("*")||screenVal.includes("-")||screenVal.includes("/")){
+       msg.innerText = eval(screenVal);
+       }else{ msg.innerText = ''}
+     });
   }); 
 }
 
 // equal to function
 Calculator.prototype.equalTo = function(){
-document.querySelector(".equal").addEventListener("click", function(){
-  msg.innerText = eval(screen.value)
+  document.querySelector(".equal").addEventListener("click", function(){
+      let screenVal = screen.value;
+      if(screenVal.includes("+")||screenVal.includes("*")||screenVal.includes("-")||screenVal.includes("/")){
+        screen.value = eval(screenVal);
+        screen.style.fontSize = "30px";
+        msg.innerText = "";
+      }
   });
 }
 
-// delete screen value
+// delete screen numbers
 Calculator.prototype.delete = function(){
  
- document.querySelector(".delete").addEventListener("click", function(){
- let screenVal = screen.value;
- //console.log(screen.value);
- let res = screenVal.slice( -screenVal.length, -1);
- screen.value = res;
+   document.querySelector(".delete").addEventListener("click", function(){
+     let screenVal = screen.value;
+     //console.log(screen.value);
+     //let res = screenVal.slice( -screenVal.length, -1);
+     let res = screenVal.substring(0,screenVal.length-1);
+     screen.value = res;
  
- });
+   });
+ 
+   // calculate screen value on delete
+   document.querySelector(".delete").addEventListener("click", ()=>{
+     let screenVal = screen.value;
+     if(screenVal.includes("+")||screenVal.includes("*")||screenVal.includes("-")||screenVal.includes("/")){
+       msg.innerText = eval(screenVal);
+     }else{ msg.innerText = ''}
+   }); 
+   // End
 }
-
-// power prototype
-Calculator.prototype.power = function (pow,light){
-  pow.addEventListener("click", function(){
-  
-  if(light.innerText.includes("Off")){
-    screen.value = "Turning On Calculator....";
-    
-      if(light.innerText.includes("Off")){
-        setTimeout(calc.on, 1000)
-       };
-       
-    }else{
-      screen.value = "Turning Off Calculator...";
-      msg.textContent = '';
-      if(light.innerText.includes("On")){
-       setTimeout(calc.off, 2000);
-       }else{ console.error(404)
-         }
-     
-     }
-  });
-}
-
-
 
 let calc = new Calculator(powerBtn);
